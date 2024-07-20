@@ -1,3 +1,3 @@
-word = input().strip().split()
+word = len(input().strip().split())
 
-print(len(word))
+print(word)
