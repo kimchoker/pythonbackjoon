@@ -1,17 +1,15 @@
-sCount = int(input())
-sCard_input = input().split()
+import sys
 
-sCard_set = set(int(num) for num in sCard_input)
+sCount = int(sys.stdin.readline())
+card_set = set(map(int, sys.stdin.readline().split()))
 
-fCount = int(input())
-fCard_input = input().split()
-
-fCard_list = [int(num) for num in fCard_input]
+fCount = int(sys.stdin.readline())
+check_list = list(map(int, sys.stdin.readline().split()))
 
 isExist = []
 
-for i in range(0, len(fCard_list)):
-    if fCard_list[i] in sCard_set:
+for i in range(0, len(check_list)):
+    if check_list[i] in card_set:
         isExist.append(1)
     else:
         isExist.append(0)
