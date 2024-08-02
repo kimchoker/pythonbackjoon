@@ -1,0 +1,2 @@
+from collections import deque
+#(그래프 정보, 시작노드, 방문 정보)def bfs(graph, start, visited): queue = deque([start]) #시작 노드를 queue에 넣어줌, 1 visited[start] = True #방문처리 while queue: #큐가 빌 때까지, queue가 있는 동안 반복 v = queue.popleft() #맨 왼쪽 원소 뽑기 print(v, end = ' ') #현재 꺼낸 원소 for i in graph[v]: #꺼낸 노드와 인접한 노드 정보를 반복 if not visited[i]: #해당 i가 false값이라면, # 2,3 ,8                queue.append(i) #전부 queue에 넣어라 visited[i] = True #방문정보를 true로 변경graph = [ [], [2, 3, 8], [1, 7], [1, 4 ,5], [3, 5], [3, 4], [7], [2, 6, 8], [1, 7]]visited = [False] * 9bfs(graph, 1, visited)
