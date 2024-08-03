@@ -1,5 +1,5 @@
 import sys
-from collections import defaultdict, deque
+from collections import defaultdict
 
 
 def add_point(name):
@@ -12,31 +12,35 @@ def add_edge(fromm, to):
         relations[fromm].add(to)
 
 
-def bfs(start):
-    # BFS 탐색을 통해 start 노드에서 도달 가능한 모든 노드를 찾음
-    queue = deque([start])
-    reachable = set()
+def dfs(fromm, to, visited):
+    # 목적지에 도달했으면 True
+    if fromm == to:
+        return True
 
-    while queue:
-        current = queue.popleft()
-        if current in reachable:
-            continue
-        reachable.add(current)
+    # 이미 방문한 노드라면 False
+    if fromm in visited:
+        return False
 
-        for neighbor in relations.get(current, []):
-            if neighbor not in reachable:
-                queue.append(neighbor)
+    visited.add(fromm)
 
-    return reachable
+    # 현재 노드의 모든 이웃 노드에 대해 DFS 탐색
+    for neighbor in relations.get(fromm, []):
+        if dfs(neighbor, to, visited):
+            return True
+
+    return False
 
 
 def is_this_in_there(fromm, to):
-    reachable_nodes = bfs(fromm)
-    return 'T' if to in reachable_nodes else 'F'
+    visited = set()
+    if dfs(fromm, to, visited):
+        return 'T'
+    else:
+        return 'F'
 
 
-# Input processing
 relations = defaultdict(set)
+# 전제 수
 proposition = int(sys.stdin.readline().strip())
 
 for _ in range(proposition):
