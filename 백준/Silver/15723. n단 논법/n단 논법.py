@@ -24,7 +24,7 @@ def dfs(fromm, to, visited):
     visited.add(fromm)
 
     # 현재 노드의 모든 이웃 노드에 대해 DFS 탐색
-    for neighbor in relations.get(fromm, []):
+    for neighbor in relations.get(fromm):
         if dfs(neighbor, to, visited):
             return True
 
